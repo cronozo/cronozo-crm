@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Logger;
 
-
 use App\Shared\Domain\Logger;
 
 final class MonologLogger implements Logger

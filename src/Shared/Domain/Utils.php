@@ -4,54 +4,42 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain;
 
-use DateTimeImmutable;
-use DateTimeInterface;
-
-use const JSON_ERROR_NONE;
-use const JSON_THROW_ON_ERROR;
-
-use JsonException;
-
 use function Lambdish\Phunctional\filter;
-
-use ReflectionClass;
-use RuntimeException;
-
 use function Symfony\Component\String\u;
 
 final class Utils
 {
-    public static function dateToString(DateTimeInterface $date): string
+    public static function dateToString(\DateTimeInterface $date): string
     {
-        return $date->format(DateTimeInterface::ATOM);
+        return $date->format(\DateTimeInterface::ATOM);
     }
 
-    public static function stringToDate(string $date): DateTimeImmutable
+    public static function stringToDate(string $date): \DateTimeImmutable
     {
-        return new DateTimeImmutable($date);
+        return new \DateTimeImmutable($date);
     }
 
     /**
      * @param array<int|string, mixed> $values
      *
-     * @throws JsonException
+     * @throws \JsonException
      */
     public static function jsonEncode(array $values): string
     {
-        return json_encode($values, JSON_THROW_ON_ERROR);
+        return json_encode($values, \JSON_THROW_ON_ERROR);
     }
 
     /**
-     * @throws JsonException
+     * @throws \JsonException
      *
      * @return array<int|string, mixed>
      */
     public static function jsonDecode(string $json): array
     {
-        $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+        $data = json_decode($json, true, 512, \JSON_THROW_ON_ERROR);
 
-        if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new RuntimeException('Unable to parse response body into JSON: ' . json_last_error());
+        if (\JSON_ERROR_NONE !== json_last_error()) {
+            throw new \RuntimeException('Unable to parse response body into JSON: ' . json_last_error());
         }
 
         return $data;
@@ -99,6 +87,6 @@ final class Utils
 
     public static function extractClassName(object $object): string
     {
-        return (new ReflectionClass($object))->getShortName();
+        return (new \ReflectionClass($object))->getShortName();
     }
 }

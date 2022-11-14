@@ -6,7 +6,8 @@ namespace App\Shared\Domain\Criteria;
 
 use App\Shared\Domain\ValueObject\ValueObjectInterface;
 
-enum FilterOperator: string implements ValueObjectInterface {
+enum FilterOperator: string implements ValueObjectInterface
+{
     case EQUAL = '=';
     case NOT_EQUAL = '<>';
     case GT = '>';
@@ -22,6 +23,6 @@ enum FilterOperator: string implements ValueObjectInterface {
     public function isContaining(): bool
     {
         // @TODO compare by instanceof
-        return in_array($this->value, [self::CONTAINS->value, self::NOT_CONTAINS->value], true);
+        return \in_array($this->value, [self::CONTAINS->value, self::NOT_CONTAINS->value], true);
     }
 }

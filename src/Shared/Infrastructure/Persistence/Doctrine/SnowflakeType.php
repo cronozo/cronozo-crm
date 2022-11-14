@@ -9,6 +9,7 @@ use App\Shared\Domain\ValueObject\IntValueObject;
 use App\Shared\Infrastructure\Doctrine\Dbal\DoctrineCustomType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\IntegerType;
+
 use function Lambdish\Phunctional\last;
 
 abstract class SnowflakeType extends IntegerType implements DoctrineCustomType

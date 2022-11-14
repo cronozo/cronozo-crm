@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain;
 
-use ArrayIterator;
-use Countable;
 use IteratorAggregate;
 use Webmozart\Assert\Assert;
 
@@ -15,7 +13,7 @@ use Webmozart\Assert\Assert;
  *
  * @implements IteratorAggregate<TKey, TValue>
  */
-abstract class Collection implements Countable, IteratorAggregate
+abstract class Collection implements \Countable, \IteratorAggregate
 {
     /**
      * @param array<TKey, TValue> $items
@@ -31,11 +29,11 @@ abstract class Collection implements Countable, IteratorAggregate
     abstract protected function type(): string;
 
     /**
-     * @return ArrayIterator<TKey, TValue>
+     * @return \ArrayIterator<TKey, TValue>
      */
-    public function getIterator(): ArrayIterator
+    public function getIterator(): \ArrayIterator
     {
-        return new ArrayIterator($this->items());
+        return new \ArrayIterator($this->items());
     }
 
     public function count(): int

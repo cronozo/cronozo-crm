@@ -9,6 +9,7 @@ use App\Shared\Domain\ValueObject\Uuid;
 use App\Shared\Infrastructure\Doctrine\Dbal\DoctrineCustomType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
+
 use function Lambdish\Phunctional\last;
 
 abstract class UuidType extends StringType implements DoctrineCustomType
