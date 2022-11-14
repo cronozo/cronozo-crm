@@ -2,11 +2,31 @@
 
 declare(strict_types=1);
 
+use App\Shared\Domain\Bus\Command\AsyncCommand;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symfony\Component\Mailer\Messenger\SendEmailMessage;
-use Symfony\Component\Notifier\Message\ChatMessage;
-use Symfony\Component\Notifier\Message\SmsMessage;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
-    $containerConfigurator->extension('framework', ['messenger' => ['failure_transport' => 'failed', 'transports' => ['async' => ['dsn' => '%env(MESSENGER_TRANSPORT_DSN)%', 'options' => ['use_notify' => true, 'check_delayed_interval' => 60000], 'retry_strategy' => ['max_retries' => 3, 'multiplier' => 2]], 'failed' => 'doctrine://default?queue_name=failed'], 'routing' => [SendEmailMessage::class => 'async', ChatMessage::class => 'async', SmsMessage::class => 'async']]]);
+    $containerConfigurator->extension('framework', [
+        'messenger' => [
+            'default_bus' => 'command.bus',
+            'buses' => [
+                'command.bus' => [
+                    'middleware' => [
+                        'doctrine_transaction',
+                    ],
+                ],
+                'query.bus' => [],
+                'event.bus' => [
+                    'default_middleware' => 'allow_no_handlers',
+                ],
+            ],
+            'transports' => [
+                'sync' => 'sync://',
+                'async' => 'sync://'
+            ],
+            'routing' => [
+                AsyncCommand::class => 'async',
+            ],
+        ],
+    ]);
 };
