@@ -1,0 +1,26 @@
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-webmozart-assert/extension.neon
+    - vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+    level: 8
+    paths:
+        - src
+        - tests
+        - config
+    excludePaths:
+        - config/router.php
+    inferPrivatePropertyTypeFromConstructor: true
+    bootstrapFiles:
+        - vendor/autoload.php
+    symfony:
+        container_xml_path: %rootDir%/../../../var/cache/dev/App_KernelDevDebugContainer.xml
+        console_application_loader: tests/phpstan/console-application.php
+    doctrine:
+        objectManagerLoader: tests/phpstan/object-manager.php
