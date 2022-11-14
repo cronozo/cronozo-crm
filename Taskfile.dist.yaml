@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  start:
+    cmds:
+      - symfony composer install
+      - symfony server:start -d
+  stop:
+    cmds:
+      - symfony server:stop
+
+  restart:
+    deps: [stop, start]
