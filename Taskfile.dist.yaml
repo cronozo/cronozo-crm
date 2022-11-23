@@ -9,5 +9,14 @@ tasks:
     cmds:
       - symfony server:stop
 
+  assets-install:
+    cmds:
+      - yarn install
+
+  assets-dev:
+    deps: [assets-install]
+    cmds:
+      - yarn dev
+
   restart:
     deps: [stop, start]
