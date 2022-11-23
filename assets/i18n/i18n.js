@@ -11,7 +11,7 @@ i18n.use(initReactI18next).init({
   },
   lng: 'pl',
   supportedLngs: ['pl', 'en', 'dev'],
-  debug: __DEV__,
+  debug: true,
   interpolation: {
     escapeValue: false,
   },

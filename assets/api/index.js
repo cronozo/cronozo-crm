@@ -29,7 +29,7 @@ class API {
         this.configured = true;
     }
 
-    setCustomerToken(token) {
+    setUserToken(token) {
         this.userToken = token;
     }
 
